@@ -1,4 +1,6 @@
-
+body {
+    background-color: var(--color-base);
+}
 
 .alfa-link {
     color: var(--color-alfa);

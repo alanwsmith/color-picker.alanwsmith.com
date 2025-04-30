@@ -6,7 +6,7 @@
   </head>
   <body>
 
-<pre class="currentStyle"></pre>
+<pre id="debugOutput"></pre>
 
 <tab-group>
   <div role="tablist">
@@ -226,6 +226,7 @@
 
 let currentStyleData = ""
 let styleEl
+let debugOutput = document.querySelector("#debugOutput");
 
 const colors = ['alfa', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'black', 'white', 'bw-match', 'bw-reverse']
 
@@ -252,7 +253,10 @@ function addPlaceholderText() {
 
 
 function updateStyles() {
-    styleEl.innerHTML = currentStyleData
+
+  styleEl.innerHTML = currentStyleData;
+  // debugOutput.innerHTML = currentStyleData;
+
     
     /*
     pageUpdateEl(`.fonts-and-colors`, {
