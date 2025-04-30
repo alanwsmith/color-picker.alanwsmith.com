@@ -1,0 +1,172 @@
+
+:root {
+
+  color-scheme: light dark;
+
+  --color-alt-1: hsl(342, 25%, 87%);
+  --color-alt-2: hsl(224, 26%, 47%);
+  --color-alt-3: hsl(342, 25%, 87%);
+  --color-alt-4: hsl(342, 25%, 87%);
+  --color-background: hsl(345, 25%, 97%);
+  --color-primary: hsl(340, 26%, 7%);
+  --color-secondry: hsl(103, 26%, 24%);
+
+  --border-radius-xxsmall: 0.1rem;
+  --border-radius-xsmall: 0.2rem;
+  --border-radius-small: 0.3rem;
+  --border-radius-medium: 0.4rem;
+  --border-radius-large: 0.5rem;
+  --border-radius-xlarge: 0.6rem;
+  --border-radius-xxlarge: 0.7rem;
+
+  --font-family-primary: system-ui, sans-serif;
+
+  --font-size-xsmall: clamp(0.78rem, calc(0.77rem + 0.03vw), 0.80rem);
+  --font-size-small: clamp(0.94rem, calc(0.92rem + 0.11vw), 1.00rem);
+  --font-size-medium: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
+  --font-size-large: clamp(1.35rem, calc(1.28rem + 0.37vw), 1.56rem);
+  --font-size-xlarge: clamp(1.62rem, calc(1.50rem + 0.58vw), 1.95rem);
+  --font-size-xxlarge: clamp(1.94rem, calc(1.77rem + 0.87vw), 2.44rem);
+  --font-size-xxxlarge: clamp(2.33rem, calc(2.08rem + 1.25vw), 3.05rem);
+  --font-size-xxxxlarge: clamp(2.80rem, calc(2.45rem + 1.77vw), 3.82rem);
+
+  --margin-xxsmall: var(--padding-xxsmall);
+  --margin-xsmall:  var(--padding-xsmall);
+  --margin-small:  var(--padding-small);
+  --margin-medium: var(--padding-medium);
+  --margin-large: var(--padding-large);
+  --margin-xlarge: var(--padding-xlarge);
+  --margin-xxlarge: var(--padding-xxlarge);
+
+  --padding-xxsmall: 0.1rem;
+  --padding-xsmall: 0.3rem;
+  --padding-small: 0.4rem;
+  --padding-medium: 0.6rem;
+  --padding-large: 1.2rem;
+  --padding-xlarge: 2.1em;
+  --padding-xxlarge: 3.2em;
+
+  --width-xxsmall: min(100vw - 1.4rem, 12ch);
+  --width-xsmall: min(100vw - 1.4rem, 22ch);
+  --width-small: min(100vw - 1.4rem, 40ch);
+  --width-medium: min(100vw - 1.4rem, 58ch);
+  --width-large: min(100vw - 1.4rem, 72ch);
+  --width-full: 100vw - 1.4rem;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: hsl(0, 0%, 2%);
+    --color-secondary: hsl(0, 0%, 98%);
+    --color-primary: hsl(103, 26%, 24%);
+    --color-alt-1: hsl(342, 25%, 10%);
+    --color-alt-2: hsl(225, 25%, 70%);
+  }
+}
+
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+::marker {
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-alt-1);
+}
+
+a:hover, a:focus {
+  color: var(--color-alt-2);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-medium);
+  line-height: 1.5; 
+}
+
+h1, h2, h3 {
+  line-height: 1.1;
+  color: var(--color-primary);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--font-size-xxxlarge);
+  margin-top: 1em;
+}
+
+h2 {
+  font-size: var(--font-size-xxlarge);
+  --flow-space: 1.3em;
+}
+
+h3 {
+  font-size: var(--font-size-xlarge);
+  --flow-space: 1.0em;
+}
+
+.flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1em);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+li > :where(:not(:first-child)) {
+  margin-top: 1em;
+}
+
+ol > :where(:not(:first-child)) {
+  margin-top: 1em;
+}
+
+ul > :where(:not(:first-child)) {
+  margin-top: 1em;
+}
+
+.wrapper-xxsmall {
+  width: var(--width-small);
+  margin-inline: auto;
+}
+
+.wrapper-xsmall {
+  width: var(--width-small);
+  margin-inline: auto;
+}
+
+.wrapper-small {
+  width: var(--width-small);
+  margin-inline: auto;
+}
+
+.wrapper-medium{
+  width: var(--width-medium);
+  margin-inline: auto;
+}
+
+.wrapper-large{
+  width: var(--width-large);
+  margin-inline: auto;
+}
+
+.wrapper-full{
+  width: var(--width-full);
+  margin-inline: auto;
+}
+
+
+
+
