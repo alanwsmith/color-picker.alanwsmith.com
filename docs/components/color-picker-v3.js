@@ -1323,6 +1323,16 @@ h2, h3 {
       return response.trim()
     }
 
+    genStylesToSend() {
+      let styles = ``
+      const mode = this.state.defaultMode
+      styles += `:root { 
+${this.genMatchStyles(mode)}${this.genStylesV2(mode)} 
+}
+`
+      return styles;
+    }
+
     genStylesFull() {
       let styles = ``
       const mode = this.state.defaultMode
@@ -1352,7 +1362,7 @@ ${this.genMatchStyles(altMode)}${this.genStylesV2(altMode)}
       styles += `}\n`
 
       // styles += `${this.genBaseStyles()}\n`
-      styles += `${this.genBaseStylesV2()}\n`
+      // styles += `${this.genBaseStylesV2()}\n`
 
       return styles
     }
@@ -1812,7 +1822,7 @@ ${this.genMatchStyles(altMode)}${this.genStylesV2(altMode)}
       if (this.childWindow && this.childWindow.name === this.childWindowName) {
         const payload = JSON.stringify({
           type: 'colors-and-fonts',
-          styles: this.genStylesFull(),
+          styles: this.genStylesToSend(),
           mode: this.mode(),
         })
         this.childWindow.postMessage(payload)
