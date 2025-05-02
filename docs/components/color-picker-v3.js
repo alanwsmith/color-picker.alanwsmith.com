@@ -298,7 +298,6 @@ customElements.define(
               for your site
             </li>
         </ol> 
--->
         <h3>The Randomizer</h3>
         <p>
           The <em>Randomize</em> button produces random values for the Lightness,
@@ -372,6 +371,7 @@ customElements.define(
             <a href="https://hachyderm.io/deck/@TheIdOfAlan">hit me up on mastodon</a>
             </li>
         </ul>
+-->
         </div>
 
         <div class="stylesheet-wrapper section-wrapper">
