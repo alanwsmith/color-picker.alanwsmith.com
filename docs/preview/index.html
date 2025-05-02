@@ -44,8 +44,8 @@
 
   <div role="tabpanel" class="flow" hidden>
     <p><strong>Base colors:</strong> There are six base colors for each
-    palette: --color-alfa, --color-bravo, --color-charlie, --color-delta, 
-    --color-echo, and --color-foxtrot. I find these
+    palette: --color-primary, --color-secondary, --color-alt-1, --color-alt-2, 
+    --color-alt-3, and --color-alt-4. I find these
     generic names easier to work with than names like &quot;primary&quot;,
     &quot;secondary&quot;, &quot;accent&quot;, etc... Those names have 
     specific meaning and I often find I want to use a color when the meaning
@@ -53,38 +53,31 @@
     </p>
     <div class="swatch-row">
         <div>
-            <div class="color-alfa">alfa</div>
+            <div class="color-primary">alfa</div>
             <div class="swatch-square bg-alfa"></div>
         </div>
         <div>
-            <div class="color-bravo">bravo</div>
+            <div class="color-secondary">bravo</div>
             <div class="swatch-square bg-bravo"></div>
         </div>
         <div>
-            <div class="color-charlie">charlie</div>
+            <div class="color-alt-1">charlie</div>
             <div class="swatch-square bg-charlie"></div>
         </div>
         <div>
-            <div class="color-delta">delta</div>
+            <div class="color-alt-2">delta</div>
             <div class="swatch-square bg-delta"></div>
         </div>
         <div>
-            <div class="color-echo">echo</div>
+            <div class="color-alt-3">echo</div>
             <div class="swatch-square bg-echo"></div>
         </div>
         <div>
-            <div class="color-foxtrot">foxtrot</div>
+            <div class="color-alt-4">foxtrot</div>
             <div class="swatch-square bg-foxtrot"></div>
         </div>
     </div>
 
-    <p><strong>Why Not Numbers?</strong> For a similar reason. Numbers imply
-    order which I often think of as priority when it comes to 
-    design. Trying to remember what priority or level I each color is 
-    is harder for me to do then remembering them with the name. Sure, there's
-    an implicit order with the alfa, bravo, charlie... names, but it's
-    a lot easier for me to remember that &quot;.color-charlie&quot; is green than
-    &quot;.color-4&quot;</p>
   </div>
 
 
@@ -148,8 +141,8 @@
         in the different colors. The main body text is <em>bravo</em> so
         the examples are <em>alfa</em>, <em>charlie</em>, <em>delta</em>,
         <em>echo</em>, <em>foxtrot</em>.<p>
-        <p><a href="#" class="alfa-link">alfa link</a></p>
-        <p>Lorem ipsum <a href="#" class="alfa-link">alfa link</a> dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nunc eu leo consectetur, quis tempor nunc pretium. Phasellus commodo vitae libero a tristique. Maecenas quis neque malesuada leo rutrum luctus <a href="#" class="alfa-link">alfa link</a> id et ante. Donec turpis tortor, feugiat in condimentum in, pharetra ut quam. Vestibulum rutrum sem et orci blandit sodales. Proin faucibus pellentesque elementum. </p>
+        <p><a href="#" class="bravo-link">bravo link</a></p>
+        <p>Lorem ipsum <a href="#" class="bravo-link">bravo link</a> dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nunc eu leo consectetur, quis tempor nunc pretium. Phasellus commodo vitae libero a tristique. Maecenas quis neque malesuada leo rutrum luctus <a href="#" class="bravo-link">bravo link</a> id et ante. Donec turpis tortor, feugiat in condimentum in, pharetra ut quam. Vestibulum rutrum sem et orci blandit sodales. Proin faucibus pellentesque elementum. </p>
         <p><a href="#" class="charlie-link">charlie link</a></p>
         <p>Sed enim <a href="#" class="charlie-link">charlie link</a> massa, pellentesque a tempor vitae, pulvinar nec elit. Nulla turpis neque, interdum et pulvinar nec, ullamcorper at orci.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere <a href="#" class="charlie-link">charlie link</a> cubilia curae; Fusce sem magna, rhoncus quis ex in, imperdiet euismod nulla. Aenean consectetur nunc eu quam aliquet fermentum. Nulla ac placerat turpis. Nam odio arcu, dapibus vel posuere ac, aliquet eu lorem. Donec et viverra diam.</p>
         <p><a href="#" class="delta-link">delta link</a></p>
@@ -220,17 +213,15 @@
 
 <script src="/components/tab-group.js" type="module"></script>
 
-
-
-
-
 <script type="module">
 
 let currentStyleData = ""
 let styleEl
 let debugOutput = document.querySelector("#debugOutput");
 
-const colors = ['alfa', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'black', 'white', 'bw-match', 'bw-reverse']
+// const colors = ['alfa', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'black', 'white', 'bw-match', 'bw-reverse']
+const colors = ['primary', 'secondary', 'alt-1', 'alt-2', 'alt-3', 'alt-4', 'bw-match', 'bw-reverse']
+
 
 function addPlaceholderText() {
     const paragraphs = [
@@ -255,17 +246,7 @@ function addPlaceholderText() {
 
 
 function updateStyles() {
-
   styleEl.innerHTML = currentStyleData;
-  // debugOutput.innerHTML = currentStyleData;
-
-    
-    /*
-    pageUpdateEl(`.fonts-and-colors`, {
-        innerHTML: currentStyleData
-    })
-   */
-
 }
 
 window.addEventListener("message", (event) => {
@@ -274,6 +255,7 @@ window.addEventListener("message", (event) => {
     console.log("got message")
     if (data.type === "colors-and-fonts") {
         if (styleEl) {
+                /*
             if (data.mode === 'light') {
                 document.body.classList.add('light')
                 document.body.classList.remove('dark')
@@ -281,6 +263,8 @@ window.addEventListener("message", (event) => {
                 document.body.classList.add('dark')
                 document.body.classList.remove('light')
             }
+                */
+
             currentStyleData = data.styles
             updateStyles()
         }
@@ -299,7 +283,6 @@ function makeAlphaExamples() {
             </div>
             `
         })
-
         for (let alpha = 90; alpha > 0; alpha = alpha - 10) {
             pageAddTo(colorWrapper, 'div', {
                 innerHTML: `
@@ -316,8 +299,11 @@ function makeAlphaExamples() {
 
 
 function makeHeadingExamples() {
-    const c1s = ['alfa']
-    const c2s = ['bravo', 'charlie', 'delta', 'echo', 'foxtrot']
+    // const c1s = ['alfa']
+    // const c2s = ['bravo', 'charlie', 'delta', 'echo', 'foxtrot']
+
+    const c1s = ['primary']
+    const c2s = ['secondary', 'alt-1', 'delta', 'echo', 'foxtrot']
 
     c1s.forEach((c1) => {
         c2s.forEach((c2) => {
