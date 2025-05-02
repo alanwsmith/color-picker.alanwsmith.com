@@ -1325,7 +1325,7 @@ h2, h3 {
 
     genStylesToSend() {
       let styles = ``
-      const mode = this.state.defaultMode
+      const mode = this.state.active.mode
       styles += `:root { 
 ${this.genMatchStyles(mode)}${this.genStylesV2(mode)} 
 }
