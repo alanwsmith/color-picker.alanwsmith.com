@@ -1,3 +1,17 @@
+const nameMap = {
+  'alfa': 'primary',
+  'bravo': 'secondary',
+  'charlie': 'alt-1',
+  'delta': 'alt-2',
+  'echo': 'alt-3',
+  'foxtrot': 'alt-4',
+  'base': 'background',
+  'black': 'black',
+  'white': 'white',
+  'bw-match': 'bw-match',
+  'bw-reverse': 'bw-reverse',
+}
+
 customElements.define(
   'color-picker',
   class CodeBlock extends HTMLElement {
@@ -175,7 +189,7 @@ customElements.define(
             },
           },
         },
-        defaultMode: 'dark',
+        defaultMode: 'light',
         codeBlockColors: {
           alfa: { l: 40, c: 0.1, h: 30 },
           bravo: { l: 40, c: 0.1, h: 60 },
@@ -212,7 +226,7 @@ customElements.define(
             <div class="slider-section"></div>
         </div>
         <div class="section-wrapper">
-            <h3>Primary: <span class="dev-color-alfa">alfa</span> <span class="dev-color-bravo">bravo</span></h3>
+            <h3>Primary: <span class="dev-color-alfa">Primary</span> <span class="dev-color-bravo">Secondary</span></h3>
             <div class="primary-section">
                 <div class="primary-buttons"></div>
                 <div class="primary-chips"></div>
@@ -248,6 +262,8 @@ customElements.define(
         </div>
 
         <div class="section-wrapper">
+
+<!--
         <h3>Instructions</h3>
         <ol class="flow">
             <li>
@@ -259,15 +275,15 @@ customElements.define(
               Use the six mini-palette squares in the Primary section to choose a base 
               set to work off</li>
             <li>
-              Use the <em>alfa</em> and <em>bravo</em> buttons in the Primary section
+              Use the <em>primary</em> and <em>secondary</em> buttons in the Primary section
               to set those colors</li>
             <li>
-              Changing the <em>alfa</em> color also changes the palette set available
+              Changing the <em>primary</em> color also changes the palette set available
               for the Secondary <em>charlie</em> and <em>delta</em> colors. Those are chosen
               by first selecting one of the 3x3 color square buttons then choosing a specific 
               pair of colors below it</li>
             <li>
-              Changing the <em>bravo</em> color in the Primary section changes the
+              Changing the <em>secondary</em> color in the Primary section changes the
               Secondary <em>echo</em> and <em>foxtrot</em> in the same way</li>
             <li>
               Switch to Dark mode next to the main Lightness, Chroma, and Hue 
@@ -282,6 +298,7 @@ customElements.define(
               for your site
             </li>
         </ol> 
+-->
         <h3>The Randomizer</h3>
         <p>
           The <em>Randomize</em> button produces random values for the Lightness,
@@ -1104,7 +1121,6 @@ h2, h3 {
 
     genBaseStyles() {
       let styles = ``
-
       const keys = [
         'base',
         'alfa',
@@ -1118,28 +1134,61 @@ h2, h3 {
         'bw-match',
         'bw-reverse',
       ]
-
       keys.forEach((key) => {
         styles += `.color-${key} { color: var(--color-${key}); }\n`
         for (let alpha = 10; alpha < 100; alpha = alpha + 10) {
           styles += `.color-${key}-${alpha} { color: var(--color-${key}-${alpha}); }\n`
         }
       })
-
       keys.forEach((key) => {
         styles += `.bg-${key} { background-color: var(--color-${key}); }\n`
         for (let alpha = 10; alpha < 100; alpha = alpha + 10) {
           styles += `.bg-${key}-${alpha} { background-color: var(--color-${key}-${alpha}); }\n`
         }
       })
-
       for (let key in this.state.codeBlockColors) {
         styles += `.code-block-${key} { color: var(--code-block-${key}); }\n`
       }
-
       styles += `.code-block-line-numbers { color: var(--code-block-line-numbers); }\n`
       styles += `.code-block-base { color: var(--code-block-base); }\n`
       styles += `.code-block-border { color: var(--code-block-border); }\n`
+      return styles
+    }
+
+
+    genBaseStylesV2() {
+      let styles = ``
+      const keys = [
+        'background',
+        'primary',
+        'secondary',
+        'alt-1',
+        'alt-2',
+        'alt-3',
+        'alt-4',
+        'black',
+        'white',
+        'bw-match',
+        'bw-reverse',
+      ]
+      keys.forEach((key) => {
+        styles += `.color-${key} { color: var(--color-${key}); }\n`
+        for (let alpha = 10; alpha < 100; alpha = alpha + 10) {
+          styles += `.color-${key}-${alpha} { color: var(--color-${key}-${alpha}); }\n`
+        }
+      })
+      keys.forEach((key) => {
+        styles += `.bg-${key} { background-color: var(--color-${key}); }\n`
+        for (let alpha = 10; alpha < 100; alpha = alpha + 10) {
+          styles += `.bg-${key}-${alpha} { background-color: var(--color-${key}-${alpha}); }\n`
+        }
+      })
+      // for (let key in this.state.codeBlockColors) {
+      //   styles += `.code-block-${key} { color: var(--code-block-${key}); }\n`
+      // }
+      // styles += `.code-block-line-numbers { color: var(--code-block-line-numbers); }\n`
+      // styles += `.code-block-base { color: var(--code-block-base); }\n`
+      // styles += `.code-block-border { color: var(--code-block-border); }\n`
       return styles
     }
 
@@ -1149,21 +1198,16 @@ h2, h3 {
         dark: { match: '0 0 0', reverse: '255 255 255' },
       }
       let styles = ``
-
       styles += `--color-bw-match: rgb(${config[mode].match});\n`
       for (let alpha = 90; alpha > 0; alpha = alpha - 10) {
         styles += `--color-bw-match-${alpha}: rgb(${config[mode].match} / ${alpha}%);\n`
       }
-
       styles += `--color-bw-reverse: rgb(${config[mode].reverse});\n`
       for (let alpha = 90; alpha > 0; alpha = alpha - 10) {
         styles += `--color-bw-reverse-${alpha}: rgb(${config[mode].reverse} / ${alpha}%);\n`
       }
-
-      styles += `--code-block-base: rgb(${config[mode].match} / 20%);\n`
-
-      styles += `--code-block-border: rgb(${config[mode].reverse} / 60%);\n`
-
+      //styles += `--code-block-base: rgb(${config[mode].match} / 20%);\n`
+      //styles += `--code-block-border: rgb(${config[mode].reverse} / 60%);\n`
       return styles
     }
 
@@ -1198,7 +1242,6 @@ h2, h3 {
           )
         }
       }
-
       for (let color in this.state.codeBlockColors) {
         const theValues = this.getCodeBlockColor(
           mode,
@@ -1213,7 +1256,6 @@ h2, h3 {
           )} ${theValues[2].toFixed(3)})`
         )
       }
-
       const forLineNumbers = this.getBravo(mode)
       response += this.prop(
         `--code-block-line-numbers`,
@@ -1221,101 +1263,96 @@ h2, h3 {
           5
         )} ${forLineNumbers[2].toFixed(3)} / 45%)`
       )
+      return response.trim()
+    }
 
+    genStylesV2(mode) {
+      let response = ``
+      const theValues = {
+        base: [
+          this.state.modes[mode].l,
+          this.state.modes[mode].c,
+          this.state.modes[mode].h,
+        ],
+        alfa: this.getAlfa(mode),
+        bravo: this.getBravo(mode),
+        charlie: this.getCharlie(mode),
+        delta: this.getDelta(mode),
+        echo: this.getEcho(mode),
+        foxtrot: this.getFoxtrot(mode),
+      }
+      for (let color in theValues) {
+        response += this.prop(
+          `--color-${nameMap[color]}`,
+          `oklch(${theValues[color][0].toFixed(3)}% ${theValues[
+            color
+          ][1].toFixed(5)} ${theValues[color][2].toFixed(3)})`
+        )
+        for (let alpha = 90; alpha > 0; alpha = alpha - 10) {
+          response += this.prop(
+            `--color-${nameMap[color]}-${alpha}`,
+            `oklch(${theValues[color][0].toFixed(3)}% ${theValues[
+              color
+            ][1].toFixed(5)} ${theValues[color][2].toFixed(3)} / ${alpha}%)`
+          )
+        }
+      }
+      /*
+      for (let color in this.state.codeBlockColors) {
+        const theValues = this.getCodeBlockColor(
+          mode,
+          this.state.codeBlockColors[color].l,
+          this.state.codeBlockColors[color].c,
+          this.state.codeBlockColors[color].h
+        )
+        response += this.prop(
+          `--code-block-${color}`,
+          `oklch(${theValues[0].toFixed(3)}% ${theValues[1].toFixed(
+            5
+          )} ${theValues[2].toFixed(3)})`
+        )
+      }
+      const forLineNumbers = this.getBravo(mode)
+      response += this.prop(
+        `--code-block-line-numbers`,
+        `oklch(${forLineNumbers[0].toFixed(3)}% ${forLineNumbers[1].toFixed(
+          5
+        )} ${forLineNumbers[2].toFixed(3)} / 45%)`
+      )
+      */
       return response.trim()
     }
 
     genStylesFull() {
-      let styles = `
-      :root {
-
-    --size-base: 16px;
-    --size-1: 2.986rem;
-    --size-2: 2.488rem;
-    --size-3: 2.074rem;
-    --size-4: 1.728rem;
-    --size-5: 1.44rem;
-    --size-6: 1.2rem;
-    --size-7: 1rem;
-    --size-8: 0.833rem;
-    --size-9: 0.694rem;
-    --size-10: 0.579rem;
-
-    --width-alfa: 40rem;
-
-          --color-black: rgb(0 0 0);
-          --border-black: 1px solid var(--color-black);
-          --color-white: rgb(255 255 255);
-          --border-white: 1px solid var(--color-white);
-          --color-black-10: rgb(0 0 0 / 10%);
-          --border-black-10: 1px solid var(--color-black-10);
-          --color-white-10: rgb(255 255 255 / 10%);
-          --border-white-10: 1px solid var(--color-white-10);
-          --color-black-20: rgb(0 0 0 / 20%);
-          --border-black-20: 1px solid var(--color-black-20);
-          --color-white-20: rgb(255 255 255 / 20%);
-          --border-white-20: 1px solid var(--color-white-20);
-          --color-black-30: rgb(0 0 0 / 30%);
-          --border-black-30: 1px solid var(--color-black-30);
-          --color-white-30: rgb(255 255 255 / 30%);
-          --border-white-30: 1px solid var(--color-white-30);
-          --color-black-40: rgb(0 0 0 / 40%);
-          --border-black-40: 1px solid var(--color-black-40);
-          --color-white-40: rgb(255 255 255 / 40%);
-          --border-white-40: 1px solid var(--color-white-40);
-          --color-black-50: rgb(0 0 0 / 50%);
-          --border-black-50: 1px solid var(--color-black-50);
-          --color-white-50: rgb(255 255 255 / 50%);
-          --border-white-50: 1px solid var(--color-white-50);
-          --color-black-60: rgb(0 0 0 / 60%);
-          --border-black-60: 1px solid var(--color-black-60);
-          --color-white-60: rgb(255 255 255 / 60%);
-          --border-white-60: 1px solid var(--color-white-60);
-          --color-black-70: rgb(0 0 0 / 70%);
-          --border-black-70: 1px solid var(--color-black-70);
-          --color-white-70: rgb(255 255 255 / 70%);
-          --border-white-70: 1px solid var(--color-white-70);
-          --color-black-80: rgb(0 0 0 / 80%);
-          --border-black-80: 1px solid var(--color-black-80);
-          --color-white-80: rgb(255 255 255 / 80%);
-          --border-white-80: 1px solid var(--color-white-80);
-          --color-black-90: rgb(0 0 0 / 90%);
-          --border-black-90: 1px solid var(--color-black-90);
-          --color-white-90: rgb(255 255 255 / 90%);
-          --border-white-90: 1px solid var(--color-white-90);
-          
-      }
-      
-      `
-
+      let styles = ``
       const mode = this.state.defaultMode
       const altMode = mode === 'light' ? 'dark' : 'light'
 
-      // styles += `:root {
-      //   color-scheme: ${mode} ${altMode};
-      // }
-      // `
+      styles += `:root { 
+${this.genMatchStyles(mode)}${this.genStylesV2(mode)} 
+}
+`
 
-      styles += `body { 
-      ${this.genMatchStyles(mode)}        
-      ${this.genStyles(mode)} 
-      }`
-      styles += `body.${altMode} { 
-              ${this.genMatchStyles(altMode)}  
-              ${this.genStyles(altMode)} 
-          }\n`
+// THIS is for a way to switch via classes that 
+// I was using at one time, but am not now
+      // styles += `body.${altMode} { 
+      //         ${this.genMatchStyles(altMode)}  
+      //         ${this.genStyles(altMode)} 
+      //     }\n`
+
       styles += `@media (prefers-color-scheme: ${altMode}) {\n`
-      styles += `body { 
-              ${this.genMatchStyles(altMode)}  
-              ${this.genStyles(altMode)} 
-          }\n`
-      styles += `body.${mode} { 
-              ${this.genMatchStyles(mode)}  
-              ${this.genStyles(mode)} 
-          }\n`
+      styles += `:root { 
+${this.genMatchStyles(altMode)}${this.genStylesV2(altMode)} 
+}\n\n`
+
+      // styles += `body.${mode} { 
+      //         ${this.genMatchStyles(mode)}  
+      //         ${this.genStyles(mode)} 
+      //     }\n`
       styles += `}\n`
 
-      styles += `${this.genBaseStyles()}\n`
+      // styles += `${this.genBaseStyles()}\n`
+      styles += `${this.genBaseStylesV2()}\n`
 
       return styles
     }
@@ -1772,7 +1809,6 @@ h2, h3 {
 
     sendStylesheet() {
       // TODO: Add bw-match and bw-reverse
-
       if (this.childWindow && this.childWindow.name === this.childWindowName) {
         const payload = JSON.stringify({
           type: 'colors-and-fonts',
@@ -2092,11 +2128,8 @@ h2, h3 {
           this.modRemoveStyleFrom(`.ld-default-button-${mode}`, 'selected')
         }
       })
-
       this.modUpdateHTML(`.raw-data`, JSON.stringify(this.state.modes, null, 2))
-
       this.modUpdateHTML(`.the-stylesheet`, this.genStylesFull())
-
       this.sendStylesheet()
     }
 
